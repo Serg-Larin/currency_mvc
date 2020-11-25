@@ -35,7 +35,7 @@ $('#exchange').on('click',function () {
     }
 
     $.ajax({
-        url: "http://localhost/calculate",
+        url: "/calculate",
         data: data,
         method: 'POST',
         dataType: 'json'
