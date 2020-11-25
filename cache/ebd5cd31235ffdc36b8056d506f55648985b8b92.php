@@ -1,0 +1,32 @@
+<?php $__env->startSection('content'); ?>
+<h1><b>New category</b></h1>
+<hr>
+<div class="col-4">
+    <form action="" method="post" id="add_category_form">
+        <div class="form-group">
+            <label for="formGroupExampleInput2">category</label>
+            <input type="text" name="category" class="form-control" id="category_value">
+        </div>
+        <button type="submit" class="btn btn-primary" id="add_category_button">Submit</button>
+    </form>
+</div>
+
+<script>
+    $('#add_category_form').submit(function (e) {
+        let form = new FormData(this);
+        let button = $('#add_category_button');
+        button.attr('disabled',true);
+
+        ajaxRequest( '/admin/category/add',form).done(function (res) {
+            console.log(res);
+            callMessage(res) ?  setTimeout(function (){
+                $(location).attr('href', '/admin/categories')
+            },500) : button.removeAttr('disabled');
+        });
+
+        e.preventDefault();
+    })
+</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('adminLayouts.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/first_mvc/views/category/add.blade.php ENDPATH**/ ?>
